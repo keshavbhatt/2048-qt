@@ -1,0 +1,32 @@
+name: qt-2048-snap
+version: "1"
+summary: Single-player puzzle game. # 79 char long summary
+description: |
+  2048 is a single-player puzzle game in which the objective is to slide numbered tiles on       
+  a grid to combine them and create a tile with the number 2048.
+
+grade: stable
+confinement: strict
+
+apps:
+  qt-2048-snap:
+    command: desktop-launch qt-2048-snap
+    plugs:
+      - x11
+      - home
+      - unity7
+
+parts:
+  qt-2048-snap:
+    source: src-2048/
+    plugin: qmake
+    qt-version: qt5
+    build-packages:
+      - build-essential
+      - qttools5-dev
+      - libqt5svg5-dev
+      - qttools5-dev-tools
+      - qtbase5-dev
+    stage:
+      - -usr/share/pkgconfig
+    after: [desktop-qt5]
