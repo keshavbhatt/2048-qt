@@ -4,12 +4,15 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webkitwidgets network
+QT       += core webkitwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = qt-2048-snap
+TARGET = 2048-qt
 TEMPLATE = app
+
+
+RC_ICONS = icon.ico
 
 
 SOURCES += main.cpp\
@@ -25,4 +28,8 @@ FORMS    += mainwindow.ui \
     aboutdialog.ui
 
 RESOURCES += \
-    res.qrc
+    res.qrc \
+    html.qrc
+
+DISTFILES += \
+    icon.ico

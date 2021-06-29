@@ -19,8 +19,6 @@ public:
 private slots:
     void on_actionAbout_triggered();
 
-
-
     void on_actionQuit_triggered();
 
     void on_actionDebug_triggered();
