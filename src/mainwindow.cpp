@@ -1,5 +1,4 @@
 #include "aboutdialog.h"
-#include "cookiejar.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -26,7 +25,7 @@ mainWindow::mainWindow(QWidget *parent) :
         QDir d(setting_path);
         d.mkpath(setting_path);
     }
-    QString cookieJarPath  =  setting_path + "cookiejar.dat";
+    //QString cookieJarPath  =  setting_path + "cookiejar.dat";
 
     ui->webView->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
     ui->webView->settings()->enablePersistentStorage(setting_path);
@@ -36,20 +35,9 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->actionDebug->setVisible(true);
     QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 #endif
-    QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
+    //QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
     QWebSettings::globalSettings()->setAttribute(QWebSettings::JavascriptEnabled, true);
-
-    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-    QNetworkDiskCache* diskCache = new QNetworkDiskCache(manager);
-
-    diskCache->setCacheDirectory(setting_path);
-    manager->setCache(diskCache);
-    manager->setCookieJar(new CookieJar(cookieJarPath, manager));
-
     ui->webView->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
-    ui->webView->page()->setNetworkAccessManager(manager);
-    ui->webView->page()->settings()->setMaximumPagesInCache(10);
-
     ui->webView->load(QUrl("qrc:/html/index.html"));
 }
 

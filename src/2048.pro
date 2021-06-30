@@ -21,11 +21,9 @@ RC_ICONS = icon.ico
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cookiejar.cpp \
     aboutdialog.cpp
 
 HEADERS  += mainwindow.h \
-    cookiejar.h \
     aboutdialog.h
 
 FORMS    += mainwindow.ui \

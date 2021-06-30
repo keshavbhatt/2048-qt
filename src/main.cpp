@@ -7,9 +7,9 @@ int main(int argc, char *argv[])
     mainWindow w;
 
     QString appname = APPNAMESTR;
-    QApplication::setApplicationName(appname);
-    QApplication::setOrganizationName("org.keshavnrj.ubuntu");
-    QApplication::setApplicationVersion(VERSIONSTR);
+    a.setApplicationName(appname);
+    a.setOrganizationName("org.keshavnrj.ubuntu");
+    a.setApplicationVersion(VERSIONSTR);
 
     w.setFixedSize(QSize(340,590));
     w.show();
