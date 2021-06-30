@@ -72,6 +72,7 @@ parts:
        - build-essential
        - qtbase5-dev
        - dpkg-dev
+       - libqt5webkit5-dev
    cleanup:
      after: [application]
      plugin: nil
