@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Categories=Game;
+Comment=Single player 2d puzzle game
+Exec=2048-qt
+GenericName=2048
+Icon=${SNAP}/meta/gui/icon.png
+Keywords=Puzzle;2048;game;board
+Name=2048
+Terminal=false
+Type=Application
+Name[en_IN]=2048
