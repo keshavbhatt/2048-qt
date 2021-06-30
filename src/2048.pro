@@ -11,6 +11,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = 2048-qt
 TEMPLATE = app
 
+# Set program version
+VERSION = 3.0
+DEFINES += VERSIONSTR=\\\"$${VERSION}\\\"
+DEFINES += APPNAMESTR=\\\"$${TARGET}\\\"
 
 RC_ICONS = icon.ico
 

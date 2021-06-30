@@ -8,6 +8,7 @@
 #include <QWebFrame>
 #include <QWebInspector>
 #include <QWebSettings>
+#include <QDir>
 
 
 mainWindow::mainWindow(QWidget *parent) :
@@ -19,8 +20,13 @@ mainWindow::mainWindow(QWidget *parent) :
     setWindowIcon(QIcon(":/icon.png"));
     setWindowTitle(QApplication::applicationName());
 
-    QString setting_path     =  QStandardPaths::writableLocation(QStandardPaths::DataLocation);
-    QString cookieJarPath  = QApplication::applicationDirPath().left(1) + setting_path + "cookiejar.dat";
+    QString setting_path  =  QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+
+    if(!QDir(setting_path).exists()){
+        QDir d(setting_path);
+        d.mkpath(setting_path);
+    }
+    QString cookieJarPath  =  setting_path + "cookiejar.dat";
 
     ui->webView->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
     ui->webView->settings()->enablePersistentStorage(setting_path);
