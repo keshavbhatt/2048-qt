@@ -33,3 +33,21 @@ RESOURCES += \
 
 DISTFILES += \
     icon.ico
+    
+# Default rules for deployment.
+isEmpty(PREFIX){
+ PREFIX = /usr
+}
+
+BINDIR  = $$PREFIX/bin
+DATADIR = $$PREFIX/share
+
+target.path = $$BINDIR
+
+icon.files = icon.png
+icon.path = $$DATADIR/icons/hicolor/512x512/apps/
+
+desktop.files = 2048.desktop
+desktop.path = $$DATADIR/applications/
+
+INSTALLS += target icon desktop
