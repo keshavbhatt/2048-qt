@@ -4,7 +4,7 @@ version: '3.0'
 summary: Single player puzzle game.
 description: |
   2048 is a single-player puzzle game in which the objective is to slide numbered tiles on
-a grid to combine them and create a tile with the number 2048.
+  a grid to combine them and create a tile with the number 2048.
 grade: stable 
 confinement: strict
 icon: snap/gui/icon.png
@@ -73,9 +73,9 @@ parts:
        - qtbase5-dev
        - dpkg-dev
    cleanup:
-       after: [application]
-       plugin: nil
-       override-prime: |
+     after: [application]
+     plugin: nil
+     override-prime: |
           # Remove unneeded stage files to save space
           cd usr/share
           rm -rf apport bash-completion bug doc doc-base icons lintian man pam-configs pkgconfig themes upstart zsh
