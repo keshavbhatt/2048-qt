@@ -29,6 +29,7 @@ mainWindow::mainWindow(QWidget *parent) :
 
     ui->webView->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
     ui->webView->settings()->enablePersistentStorage(setting_path);
+    QWebSettings::globalSettings()->enablePersistentStorage(setting_path);
 
     ui->actionDebug->setVisible(false);
 #ifdef QT_DEBUG
