@@ -31,6 +31,7 @@ apps:
         - wayland
         - desktop-legacy
         - browser-support
+        - network
 plugs:
     gsettings:
     gtk-3-themes:
