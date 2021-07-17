@@ -2,8 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QWebPage>
-#include <QSettings>
+#include <QWebEnginePage>
+#include <QWebEngineView>
+#include <QWebEngineSettings>
+
 
 namespace Ui {
 class mainWindow;
@@ -16,7 +18,6 @@ class mainWindow : public QMainWindow
 public:
     explicit mainWindow(QWidget *parent = 0);
     ~mainWindow();
-    Q_INVOKABLE void update_high_score(QVariant var);
 
 private slots:
     void on_actionAbout_triggered();
@@ -27,8 +28,7 @@ private slots:
 
 private:
     Ui::mainWindow *ui;
-    QWebPage *page;
-    QSettings settings;
+    QWebEngineView * webView = nullptr;
 };
 
 #endif // MAINWINDOW_H

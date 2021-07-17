@@ -24,6 +24,7 @@ private slots:
     void on_donate_clicked();
     void on_close_clicked();
     void on_source_clicked();
+    void on_textBrowser_anchorClicked(const QUrl &arg1);
 };
 
 #endif // ABOUTDIALOG_H

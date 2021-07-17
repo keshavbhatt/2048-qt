@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
-    <height>512</height>
+    <width>354</width>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,45 +34,6 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item>
-     <widget class="QWebView" name="webView" native="true">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>340</width>
-        <height>590</height>
-       </size>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="contextMenuPolicy">
-       <enum>Qt::NoContextMenu</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="url" stdset="0">
-       <url>
-        <string>qrc:/2048/index.html</string>
-       </url>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -80,7 +41,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>388</width>
+     <width>354</width>
      <height>22</height>
     </rect>
    </property>
@@ -122,20 +83,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
-   <slots>
-    <slot>reload()</slot>
-    <slot>back()</slot>
-    <slot>forward()</slot>
-    <slot>stop()</slot>
-    <slot>go_home()</slot>
-   </slots>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

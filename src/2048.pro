@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webkit webkitwidgets
+QT       += core gui webengine webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,8 +13,13 @@ TEMPLATE = app
 
 CONFIG += c++11
 
+
+CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
+
+QTQUICK_COMPILER_SKIPPED_RESOURCES += html.qrc
+
 # Set program version
-VERSION = 3.0
+VERSION = 4.0
 DEFINES += VERSIONSTR=\\\"$${VERSION}\\\"
 DEFINES += APPNAMESTR=\\\"$${TARGET}\\\"
 
