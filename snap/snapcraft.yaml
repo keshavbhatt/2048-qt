@@ -1,10 +1,11 @@
-name: qt-2048-snap
+name: 2048-game
 base: core18
-version: '3.0'
+version: '4.0'
 summary: Single player puzzle game.
 description: |
   2048 is a single-player puzzle game in which the objective is to slide numbered tiles on
   a grid to combine them and create a tile with the number 2048.
+
 grade: stable 
 confinement: strict
 icon: snap/gui/icon.png
@@ -14,70 +15,48 @@ architectures:
     run-on: amd64
     
 apps:
-  qt-2048-snap:
+  2048-game:
     command: desktop-launch 2048-qt
     environment:
        DISABLE_WAYLAND: 1
     desktop: usr/share/applications/2048.desktop
     plugs:
-        - home
-        - unity7
-        - opengl
-        - x11
         - alsa
         - audio-playback
+        - browser-support
         - desktop
         - gsettings
-        - wayland
+        - home
+        - opengl
         - desktop-legacy
-        - browser-support
-        - network
+        - unity7
+        #- network
+        - wayland
+        - x11
 plugs:
-    gsettings:
-    gtk-3-themes:
-      interface: content
-      target: $SNAP/data-dir/themes
-      default-provider: gtk-common-themes
-    icon-themes:
-      interface: content
-      target: $SNAP/data-dir/icons
-      default-provider: gtk-common-themes
-    sound-themes:
-      interface: content
-      target: $SNAP/data-dir/sounds
-      default-provider: gtk-common-themes
-    qt551:
-      interface: content
-      target: $SNAP/qt551
-      default-provider: qt551
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
+  qt513:
+    interface: content
+    target: $SNAP/qt513
+    default-provider: qt513
       
 parts:
-   application:
-     source-type: local
-     source: src/
-     plugin: qmake
-     qt-version: qt5
+   snap-launcher:
+     plugin: dump
+     source: snap_launcher/
      override-build: |
             snapcraftctl build
             sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/2048.desktop
             mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
             cp -rf ${SNAPCRAFT_PART_SRC}/2048.desktop ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/2048.desktop
-     after: [desktop-qt5]
-
-   snap-launcher:
-     plugin: dump
-     source: snap_launcher/
-   desktop-qt5:
-     plugin: nil
-     build-packages:
-       - build-essential
-       - qtbase5-dev
-       - dpkg-dev
-       - libqt5webkit5-dev
-   cleanup:
-     after: [application]
-     plugin: nil
-     override-prime: |
-          # Remove unneeded stage files to save space
-          cd usr/share
-          rm -rf apport bash-completion bug doc doc-base icons lintian man pam-configs pkgconfig themes upstart zsh
