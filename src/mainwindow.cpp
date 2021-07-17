@@ -25,11 +25,13 @@ mainWindow::mainWindow(QWidget *parent) :
         QDir d(setting_path);
         d.mkpath(setting_path);
     }
-    //QString cookieJarPath  =  setting_path + "cookiejar.dat";
 
-    ui->webView->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
-    ui->webView->settings()->enablePersistentStorage(setting_path);
+    QWebSettings *settings = ui->webView->settings();
+    settings->setAttribute(QWebSettings::LocalStorageEnabled, true);
+    settings->setLocalStoragePath(setting_path);
+    settings->enablePersistentStorage(setting_path);
     QWebSettings::globalSettings()->enablePersistentStorage(setting_path);
+    qDebug()<<setting_path;
 
     ui->actionDebug->setVisible(false);
 #ifdef QT_DEBUG
