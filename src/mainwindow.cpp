@@ -33,10 +33,10 @@ mainWindow::mainWindow(QWidget *parent) :
     QWebSettings::globalSettings()->enablePersistentStorage(setting_path);
     qDebug()<<setting_path;
 
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
     //ui->actionDebug->setVisible(false);
 #ifdef QT_DEBUG
     //ui->actionDebug->setVisible(true);
-    //QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 #endif
 
     //QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
