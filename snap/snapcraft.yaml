@@ -1,4 +1,4 @@
-name: 2048-game
+name: qt-2048-snap
 base: core18
 version: '4.0'
 summary: Single player puzzle game.
@@ -15,7 +15,7 @@ architectures:
     run-on: amd64
     
 apps:
-  2048-game:
+  qt-2048-snap:
     command: desktop-launch 2048-qt
     environment:
        DISABLE_WAYLAND: 1
