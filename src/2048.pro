@@ -4,12 +4,14 @@
 #
 #-------------------------------------------------
 
-QT       += core webkitwidgets
+QT       += core gui webkit webkitwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = 2048-qt
 TEMPLATE = app
+
+CONFIG += c++11
 
 # Set program version
 VERSION = 3.0

@@ -33,20 +33,38 @@ mainWindow::mainWindow(QWidget *parent) :
     QWebSettings::globalSettings()->enablePersistentStorage(setting_path);
     qDebug()<<setting_path;
 
-    ui->actionDebug->setVisible(false);
+    //ui->actionDebug->setVisible(false);
 #ifdef QT_DEBUG
-    ui->actionDebug->setVisible(true);
-    QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+    //ui->actionDebug->setVisible(true);
+    //QWebSettings::globalSettings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 #endif
+
     //QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
     QWebSettings::globalSettings()->setAttribute(QWebSettings::JavascriptEnabled, true);
-    ui->webView->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
+    ui->webView->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);    
+    ui->webView->page()->mainFrame()->addToJavaScriptWindowObject("mainwindow",this);
+//    connect(ui->webView,&QWebView::loadFinished,[=](bool loaded){
+//        if(loaded){
+//            QString bestScore = this->settings.value("oiks_765729283y27","0").toString();
+//            ui->webView->page()->mainFrame()->evaluateJavaScript("this.localStorage.setItem('bestScore','"+bestScore+"')");
+//        }
+//    });
+
     ui->webView->load(QUrl("qrc:/html/index.html"));
 }
 
 mainWindow::~mainWindow()
 {
     delete ui;
+}
+
+void mainWindow::update_high_score(QVariant var)
+{
+    if(var.isNull() == false && var.typeName() == QString("QString"))
+    {
+        settings.setValue("oiks_765729283y27", var.toString());
+        qDebug()<<var;
+    }
 }
 
 void mainWindow::on_actionAbout_triggered()

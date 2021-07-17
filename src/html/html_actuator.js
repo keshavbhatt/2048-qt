@@ -122,6 +122,7 @@ HTMLActuator.prototype.updateScore = function (score) {
 
 HTMLActuator.prototype.updateBestScore = function (bestScore) {
   this.bestContainer.textContent = bestScore;
+    mainwindow.update_high_score(bestScore);
 };
 
 HTMLActuator.prototype.message = function (won) {
