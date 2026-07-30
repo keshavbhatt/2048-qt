@@ -12,6 +12,7 @@ icon: snap/gui/icon.png
 
 platforms:
   amd64:
+  arm64:
 
 apps:
   qt-2048-snap:
