@@ -23,12 +23,12 @@ AboutDialog::~AboutDialog()
 
 void AboutDialog::on_moreapplication_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://snapcraft.io/search?q=keshavnrj"));
+    QDesktopServices::openUrl(QUrl("https://snapcraft.io/publisher/keshavnrj"));
 }
 
 void AboutDialog::on_donate_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://paypal.me/keshavnrj"));
+    QDesktopServices::openUrl(QUrl("https://paypal.me/keshavnrj/5"));
 }
 
 void AboutDialog::on_close_clicked()
