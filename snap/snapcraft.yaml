@@ -1,69 +1,40 @@
 name: qt-2048-snap
-base: core18
-version: '4.0'
+base: core24
+version: '4.1'
 summary: Single player puzzle game.
 description: |
   2048 is a single-player puzzle game in which the objective is to slide numbered tiles on
   a grid to combine them and create a tile with the number 2048.
 
-grade: stable 
+grade: stable
 confinement: strict
 icon: snap/gui/icon.png
 
-architectures:
-  - build-on: amd64
-    run-on: amd64
-    
+platforms:
+  amd64:
+
 apps:
   qt-2048-snap:
-    command: desktop-launch 2048-qt
+    command: usr/bin/2048-qt
+    extensions: [kde-neon-6]
+    desktop: usr/share/applications/2048-qt.desktop
     environment:
-       DISABLE_WAYLAND: 1
-    desktop: usr/share/applications/2048.desktop
+      # Chromium's own sandbox cannot start inside strict snap confinement;
+      # the snap confinement itself provides the isolation.
+      QTWEBENGINE_DISABLE_SANDBOX: "1"
     plugs:
-        - alsa
-        - audio-playback
-        - browser-support
-        - desktop
-        - gsettings
-        - home
-        - opengl
-        - desktop-legacy
-        - unity7
-        #- network
-        - wayland
-        - x11
-plugs:
-  gtk-3-themes:
-    interface: content
-    target: $SNAP/data-dir/themes
-    default-provider: gtk-common-themes
-  icon-themes:
-    interface: content
-    target: $SNAP/data-dir/icons
-    default-provider: gtk-common-themes
-  sound-themes:
-    interface: content
-    target: $SNAP/data-dir/sounds
-    default-provider: gtk-common-themes
-  qt513:
-    interface: content
-    target: $SNAP/qt513
-    default-provider: qt513
-      
+      - browser-support
+      - opengl
+      - wayland
+      - x11
+
 parts:
-   snap-launcher:
-     plugin: dump
-     source: snap_launcher/
-     
-   application:
-     plugin: dump
-     source: src/
-     override-build: |
-            snapcraftctl build
-            sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/2048.desktop
-            mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
-            cp -rf ${SNAPCRAFT_PART_SRC}/2048.desktop ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/2048.desktop
-     override-prime: |
-            snapcraftctl prime
-            rm -rf src/
+  application:
+    plugin: cmake
+    source: .
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_BUILD_TYPE=Release
+    override-build: |
+      craftctl default
+      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/512x512/apps/2048-qt.png|' ${CRAFT_PART_INSTALL}/usr/share/applications/2048-qt.desktop

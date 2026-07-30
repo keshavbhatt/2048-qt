@@ -1,15 +1,26 @@
 # 2048-Qt
- Web based Popular 2048 game app implemented in Qt 5, uses QWebKit.
+ Web based Popular 2048 game app implemented in Qt 6, uses QtWebEngine.
 
 
  ## How to build
 
-* Clone project.
-* Open the project with Qt Creator
-* Configure the project with compitable Qt toolkit (Qt5x recommeneded)
-* Build and Run
+Requirements: CMake >= 3.21, Ninja, Qt 6.2+ with the WebEngine module.
 
-Alternatively you can directly run `qmake` in source dir of project to configure and use `make` to build.
+```bash
+git clone https://github.com/keshavbhatt/2048-qt.git
+cd 2048-qt
+cmake --preset release
+cmake --build build/release
+./build/release/2048-qt
+```
+
+To install:
+
+```bash
+cmake --install build/release
+```
+
+Alternatively open the project in Qt Creator (it picks up `CMakeLists.txt` and the presets directly).
 
 ## Screenshots (could be old)
 ![MainWindow 2048 qt by Keshav Bhatt](https://github.com/keshavbhatt/2048-qt/blob/master/images/main_window.PNG?raw=true)

@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>2048 - By Keshav Bhatt</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/2048.png</normaloff>:/2048.png</iconset>
-  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">

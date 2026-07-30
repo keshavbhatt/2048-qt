@@ -1,7 +1,9 @@
 #include "aboutdialog.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "urlrequestinterceptor.h"
 
+#include <QWebEngineProfile>
 
 mainWindow::mainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,11 +18,25 @@ mainWindow::mainWindow(QWidget *parent) :
     ui->actionDebug->setVisible(true);
 #endif
 
+    // Qt 6's default profile is off-the-record; a named profile keeps the
+    // game's localStorage (best score, saved game) across runs.
+    auto *profile = new QWebEngineProfile(QApplication::applicationName(), this);
+    profile->setHttpCacheType(QWebEngineProfile::NoCache); // all content lives in qrc
+    profile->setUrlRequestInterceptor(new UrlRequestInterceptor(profile));
     webView = new QWebEngineView(this);
-    webView->settings()->setAttribute(QWebEngineSettings::ShowScrollBars,false);
+    webView->setPage(new QWebEnginePage(profile, webView));
+
+    auto *settings = webView->settings();
+    settings->setAttribute(QWebEngineSettings::ShowScrollBars,false);
+    // The game uses neither WebGL, canvas, favicons nor the PDF viewer.
+    settings->setAttribute(QWebEngineSettings::WebGLEnabled,false);
+    settings->setAttribute(QWebEngineSettings::Accelerated2dCanvasEnabled,false);
+    settings->setAttribute(QWebEngineSettings::AutoLoadIconsForPage,false);
+    settings->setAttribute(QWebEngineSettings::PdfViewerEnabled,false);
     webView->setMaximumSize(340,590);
     webView->load(QUrl("qrc:/html/index.html"));
     ui->centralWidget->layout()->addWidget(webView);
+    webView->setFocus();
 }
 
 mainWindow::~mainWindow()
